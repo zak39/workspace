@@ -388,8 +388,4 @@ export default {
 	min-height: 12rem !important;
 }
 
-.modal-container {
-	min-height: 670px !important;
-	max-height: 670px !important;
-}
 </style>
