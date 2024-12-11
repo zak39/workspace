@@ -32,6 +32,7 @@ class GroupFoldersGroupsMapper extends QBMapper {
 	
 	public function __construct(IDBConnection $db) {
 		$this->db = $db;
+		$this->entityClass = ConnectedGroup::class;
 	}
 	
 	/**
@@ -65,4 +66,45 @@ class GroupFoldersGroupsMapper extends QBMapper {
 
 		return $qb->executeQuery()->fetchAll();
 	}
+
+
+	/**
+	 * @return array<ConnectedGroup>
+	 */
+	public function findAllAddedGroups() : array {
+		$qb = $this->db->getQueryBuilder();
+		$query = $qb
+			->select([ 'space_id', 'group_id as gid' ])
+			->from('group_folders_groups', 'gf_groups')
+			->innerJoin(
+				'gf_groups',
+				'work_spaces',
+				'ws',
+				$qb->expr()->eq(
+					'ws.groupfolder_id',
+					'gf_groups.folder_id'
+				)
+			)
+			->where('group_id not like :wmGroup') // G and GE
+			->andWhere('group_id not like :uGroup')
+			->setParameter('wmGroup', 'SPACE-G%')
+			->setParameter('uGroup', 'SPACE-U%');
+
+		return $this->findEntities($query);
+	}
+
+    public function isUserConnectedGroup(string $uid): mixed {
+        $qb = $this->db->getQueryBuilder();
+
+        $query = $qb
+            ->select('*')
+            ->from('group_user')
+            ->where('uid = :uid')
+            ->setParameter('uid', $uid)
+        ;
+
+        $res = $query->executeQuery();
+
+        return $res->fetch();
+    }
 }
