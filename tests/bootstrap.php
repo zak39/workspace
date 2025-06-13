@@ -23,7 +23,6 @@
  *
  */
 
-use OCA\Workspace\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\Server;
 
@@ -36,7 +35,7 @@ require_once __DIR__ . '/../../../lib/base.php';
 // require_once __DIR__ . '/../../../vendor/autoload.php';
 // Fix for "Autoload path not allowed: .../tests/lib/testcase.php"
 // \OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
-Server::get(IAppManager::class)->loadApp(Application::APP_ID);
+Server::get(IAppManager::class)->loadApp('workspace');
 
 // Fix for "Autoload path not allowed: .../workspace/tests/testcase.php"
 // \OC_App::loadApp('workspace');
