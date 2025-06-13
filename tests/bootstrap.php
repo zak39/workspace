@@ -23,16 +23,22 @@
  *
  */
 
+use OCP\App\IAppManager;
+use OCP\Server;
+
 if (!defined('PHPUNIT_RUN')) {
 	define('PHPUNIT_RUN', 1);
 }
 
 require_once __DIR__ . '/../../../lib/base.php';
-
+// require_once __DIR__ . '/../../../../../tests/autoload.php';
+// require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 // Fix for "Autoload path not allowed: .../tests/lib/testcase.php"
-\OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
+// \OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
+Server::get(IAppManager::class)->loadApp('workspace');
 
 // Fix for "Autoload path not allowed: .../workspace/tests/testcase.php"
-\OC_App::loadApp('workspace');
+// \OC_App::loadApp('workspace');
 
 OC_Hook::clear();
