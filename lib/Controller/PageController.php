@@ -25,14 +25,14 @@
 
 namespace OCA\Workspace\Controller;
 
-use OCP\Util;
-use OCP\IConfig;
-use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\Response;
 use OCA\Workspace\AppInfo\Application;
 use OCA\Workspace\Service\UserService;
+use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\Response;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IConfig;
+use OCP\Util;
 
 class PageController extends Controller {
 	public function __construct(
