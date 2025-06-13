@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [8.3]
-        nextcloud-versions: ['stable31', 'master']
+        php-versions: [8.2]
+        nextcloud-versions: ['stable28', 'master']
         include:
             - php: 8.2
               nextcloud-version: master
